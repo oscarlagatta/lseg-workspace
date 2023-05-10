@@ -14,6 +14,22 @@
         "outputPath": "dist/apps/api",
         "main": "apps/api/src/main.ts",
         "tsConfig": "apps/api/tsconfig.app.json",
+        "tsPlugins": [
+          {
+            "name": "@nestjs/swagger/plugin",
+            "options": {
+              "classValidatorShim": false,
+              "introspectComments": true
+            }
+          },
+          {
+            "name": "@nestjs/graphql/plugin",
+            "options": {
+              "classValidatorShim": false,
+              "introspectComments": true
+            }
+          }
+        ],
         "assets": ["apps/api/src/assets"],
         "isolatedConfig": true,
         "webpackConfig": "apps/api/webpack.config.js"

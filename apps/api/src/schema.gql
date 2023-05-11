@@ -2,9 +2,13 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-"""Company Model"""
+"""
+Company Model
+"""
 type Company {
-  """A unique identifier"""
+  """
+  A unique identifier
+  """
   id: ID!
   name: String!
   brand: String!
@@ -13,4 +17,18 @@ type Company {
 
 type Query {
   companies: [Company!]!
+  company(id: ID!): Company
+}
+
+type Mutation {
+  createCompany(createCompanyInput: CreateCompanyInput!): Company
+}
+
+input CreateCompanyInput {
+  """
+  A new Company name
+  """
+  name: String!
+  brand: String!
+  flavors: [String!]!
 }

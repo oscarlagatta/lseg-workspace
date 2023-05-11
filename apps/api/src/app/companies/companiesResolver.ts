@@ -1,5 +1,8 @@
-import { Query, Resolver } from '@nestjs/graphql';
-import { Company } from "./entities/company.entity/company";
+import { ParseIntPipe } from '@nestjs/common';
+import { Args, ID, Mutation, Query, Resolver } from '@nestjs/graphql';
+import { CompaniesService } from './companies.service';
+import { CreateCompanyInput } from './dto/create-company.input';
+import { Company } from './entities/company.entity/company';
 
 /**
  * Resolver for the Companies entity.
@@ -7,6 +10,7 @@ import { Company } from "./entities/company.entity/company";
  */
 @Resolver()
 export class CompaniesResolver {
+  constructor(private readonly companiesService: CompaniesService) {}
   /**
    * Retrieves all companies.
    * @returns {Promise<Company[]>} An array of companies.
@@ -17,6 +21,16 @@ export class CompaniesResolver {
    */
   @Query(() => [Company], { name: 'companies' })
   async findAll(): Promise<Company[]> {
-    return [];
+    return this.companiesService.findAll();
+  }
+
+  @Query(() => Company, { name: 'company', nullable: true })
+  async findOne(@Args('id', { type: () => ID }, ParseIntPipe) id: number): Promise<Company> {
+    return this.companiesService.findOne(id);
+  }
+
+  @Mutation(() => Company, { name: 'createCompany', nullable: true })
+  async create(@Args('createCompanyInput') createCompanyInput: CreateCompanyInput) {
+    return this.companiesService.create(createCompanyInput);
   }
 }

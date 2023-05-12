@@ -1,6 +1,6 @@
-import {Field, ID, ObjectType} from '@nestjs/graphql';
-import {Column, Entity, ManyToMany, PrimaryGeneratedColumn} from 'typeorm';
-import {Company} from './company';
+import { Field, ID, ObjectType } from '@nestjs/graphql';
+import { Column, Entity, ManyToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Company } from './company';
 
 /**
  * Represents a product.
@@ -9,7 +9,6 @@ import {Company} from './company';
 @Entity()
 @ObjectType({ description: 'Product' })
 export class Product {
-
   @PrimaryGeneratedColumn()
   @Field(() => ID)
   id: number;

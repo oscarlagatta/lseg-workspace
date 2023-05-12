@@ -1,11 +1,11 @@
-import {UserInputError} from '@nestjs/apollo';
-import {Injectable} from '@nestjs/common';
-import {InjectRepository} from '@nestjs/typeorm';
-import {Repository} from 'typeorm';
-import {CreateCompanyInput} from './dto/create-company.input';
-import {UpdateCompanyInput} from './dto/update-company.input';
-import {Company} from './entities/company';
-import {Product} from './entities/product';
+import { UserInputError } from '@nestjs/apollo';
+import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { CreateCompanyInput } from './dto/create-company.input';
+import { UpdateCompanyInput } from './dto/update-company.input';
+import { Company } from './entities/company';
+import { Product } from './entities/product';
 
 @Injectable()
 export class CompaniesService {
@@ -29,9 +29,7 @@ export class CompaniesService {
   }
 
   async create(createCompanyInput: CreateCompanyInput) {
-    const products = await Promise.all(
-      createCompanyInput.products.map(name => this.preloadProductByName(name)),
-    );
+    const products = await Promise.all(createCompanyInput.products.map((name) => this.preloadProductByName(name)));
     const coffee = this.companiesRepository.create({
       ...createCompanyInput,
       products,
@@ -42,15 +40,13 @@ export class CompaniesService {
   async update(id: number, updateCompanyInput: UpdateCompanyInput) {
     const products =
       updateCompanyInput.products &&
-      (await Promise.all(
-        updateCompanyInput.products.map(name => this.preloadProductByName(name)),
-      ));
+      (await Promise.all(updateCompanyInput.products.map((name) => this.preloadProductByName(name))));
     const company = await this.companiesRepository.preload({
       id,
       ...updateCompanyInput,
       products,
     });
-    if(!company){
+    if (!company) {
       throw new UserInputError(`Company #${id} does not exist`);
     }
     return this.companiesRepository.save(company);

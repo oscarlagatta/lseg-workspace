@@ -1,9 +1,9 @@
-import {ParseIntPipe} from '@nestjs/common';
-import {Args, ID, Mutation, Query, Resolver} from '@nestjs/graphql';
-import {CompaniesService} from './companies.service';
-import {CreateCompanyInput} from './dto/create-company.input';
-import {UpdateCompanyInput} from './dto/update-company.input';
-import {Company} from './entities/company';
+import { ParseIntPipe } from '@nestjs/common';
+import { Args, ID, Mutation, Query, Resolver } from '@nestjs/graphql';
+import { CompaniesService } from './companies.service';
+import { CreateCompanyInput } from './dto/create-company.input';
+import { UpdateCompanyInput } from './dto/update-company.input';
+import { Company } from './entities/company';
 
 /**
  * Resolver for the Companies entity.

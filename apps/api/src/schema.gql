@@ -15,7 +15,7 @@ type Company {
   id: ID!
   name: String!
   brand: String!
-  products: [Product!]
+  products: [Product!]!
 }
 
 type Query {

@@ -1,6 +1,6 @@
-import {Field, ID, ObjectType} from '@nestjs/graphql';
-import {Column, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn} from 'typeorm';
-import {Product} from './product';
+import { Field, ID, ObjectType } from '@nestjs/graphql';
+import { Column, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Product } from './product';
 
 /**
  * Represents a company.
@@ -40,6 +40,6 @@ export class Company {
 
   @JoinTable()
   @ManyToMany((type) => Product, (product) => product.companies, { cascade: true } /* inverse side */)
-  @Field(() => [Product], {nullable: true})
+  @Field(() => [Product], { nullable: true })
   products?: Product[];
 }

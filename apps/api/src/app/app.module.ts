@@ -7,6 +7,7 @@ import { join } from 'path';
 import * as process from 'process';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import {DateScalar} from "./common/scalars/date.scalar";
 import { CompaniesModule } from './companies/companiesModule';
 
 /**
@@ -53,7 +54,7 @@ import { CompaniesModule } from './companies/companiesModule';
      * @type {AppService}
      */
     AppService,
-    // CompaniesService,
+    DateScalar
   ],
 })
 export class AppModule {}

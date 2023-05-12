@@ -1,5 +1,5 @@
 import { Field, ID, ObjectType } from '@nestjs/graphql';
-import { Column, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn } from 'typeorm';
+import {Column, CreateDateColumn, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn} from 'typeorm';
 import { Product } from './product';
 
 /**
@@ -42,4 +42,8 @@ export class Company {
   @ManyToMany((type) => Product, (product) => product.companies, { cascade: true } /* inverse side */)
   @Field(() => [Product], { nullable: true })
   products?: Product[];
+
+  @CreateDateColumn()
+  @Field(() => Date, { nullable: true })
+  createdAt?: Date;
 }

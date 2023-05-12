@@ -1,15 +1,19 @@
-import { Field, ID, ObjectType } from '@nestjs/graphql';
+import {Field, ID, ObjectType} from '@nestjs/graphql';
+import {Column, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn} from 'typeorm';
+import {Product} from './product';
 
 /**
  * Represents a company.
  * @class
  */
+@Entity()
 @ObjectType({ description: 'Company Model' })
 export class Company {
   /**
    * A unique identifier for the company.
    * @type {number}
    */
+  @PrimaryGeneratedColumn()
   @Field(() => ID, { description: 'A unique identifier' })
   id: number;
 
@@ -17,6 +21,7 @@ export class Company {
    * The name of the company.
    * @type {string}
    */
+  @Column()
   @Field(() => String)
   name: string;
 
@@ -24,6 +29,7 @@ export class Company {
    * The brand of the company.
    * @type {string}
    */
+  @Column()
   @Field(() => String)
   brand: string;
 
@@ -31,6 +37,9 @@ export class Company {
    * An array of flavors associated with the company.
    * @type {string[]}
    */
-  @Field(() => [String])
-  flavors: string[];
+
+  @JoinTable()
+  @ManyToMany((type) => Product, (product) => product.companies, { cascade: true } /* inverse side */)
+  @Field(() => [Product], {nullable: true})
+  products?: Product[];
 }

@@ -1,12 +1,13 @@
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
+import {SwaggerModule} from "@nestjs/swagger";
+import { TypeOrmModule } from '@nestjs/typeorm';
 import { join } from 'path';
 import * as process from 'process';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { CompaniesModule } from './companies/companiesModule';
-import { CompaniesService } from './companies/companies.service';
 
 /**
  * Represents the main application module.
@@ -14,6 +15,17 @@ import { CompaniesService } from './companies/companies.service';
  */
 @Module({
   imports: [
+    SwaggerModule,
+    TypeOrmModule.forRoot({
+      type: 'postgres',
+      host: 'localhost',
+      port: 5432,
+      username: 'postgres',
+      password: 'pass123',
+      database: 'postgres',
+      autoLoadEntities: true,
+      synchronize: true,
+    }),
     /**
      * Configures the GraphQL module.
      * @type {GraphQLModule}
@@ -41,7 +53,7 @@ import { CompaniesService } from './companies/companies.service';
      * @type {AppService}
      */
     AppService,
-    CompaniesService,
+    // CompaniesService,
   ],
 })
 export class AppModule {}

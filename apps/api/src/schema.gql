@@ -2,33 +2,43 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-"""
-Company Model
-"""
+"""Product"""
+type Product {
+  id: ID!
+  name: String!
+  companies: [Company!]!
+}
+
+"""Company Model"""
 type Company {
-  """
-  A unique identifier
-  """
+  """A unique identifier"""
   id: ID!
   name: String!
   brand: String!
-  flavors: [String!]!
+  products: [Product!]
 }
 
 type Query {
   companies: [Company!]!
-  company(id: ID!): Company
+  company(id: ID!): Company!
 }
 
 type Mutation {
-  createCompany(createCompanyInput: CreateCompanyInput!): Company
+  createCompany(createCompanyInput: CreateCompanyInput!): Company!
+  updateCompany(id: Float!, updateCompanyInput: UpdateCompanyInput!): Company!
+  removeCompany(id: Float!): Company!
 }
 
 input CreateCompanyInput {
-  """
-  A new Company name
-  """
+  """A new Company name"""
   name: String!
   brand: String!
-  flavors: [String!]!
+  products: [String!]!
+}
+
+input UpdateCompanyInput {
+  """A new Company name"""
+  name: String
+  brand: String
+  products: [String!]
 }

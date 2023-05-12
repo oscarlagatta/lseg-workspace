@@ -19,3 +19,88 @@ Run `npx nx connect-to-nx-cloud` to enable [remote caching](https://nx.app) and 
 ## Further help
 
 Visit the [Nx Documentation](https://nx.dev) to learn more.
+
+## Query
+
+```
+  {
+    companies {
+      id
+      name
+      brand
+      products
+    }
+  }
+```
+
+## Query by Id
+
+```
+  {
+    company(id: 2) {
+      id
+      name
+      brand
+
+    }
+  }
+```
+
+## Mutation
+
+```
+mutation {
+  createCompany(createCompanyInput: {
+    name: "Marks & Spencer",
+    brand: "Ecommerce",
+    products: ["consultancy", "development"]
+  }) {
+    id,
+    name,
+    brand,
+    products
+  }
+}
+```
+
+## Update Mutation
+
+```
+mutation {
+  updateCompany(id: 3, updateCompanyInput: {
+    name: "Updated"
+  }) {
+    name
+  }
+}
+```
+
+## Remove Mutation
+
+```
+mutation {
+  removeCompany(id: 2) {
+    name
+  }
+}
+```
+
+## Mutation Create Company Version 2
+
+```
+mutation {
+  createCompany(createCompanyInput: {
+    name: "Marks & Spencer",
+    brand: "Ecommerce",
+    products: ["consultancy", "development"]
+  }) {
+    id,
+    name,
+    brand,
+    products {
+      id
+      name
+    }
+  }
+}
+```

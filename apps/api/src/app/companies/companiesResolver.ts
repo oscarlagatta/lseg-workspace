@@ -1,8 +1,9 @@
-import { ParseIntPipe } from '@nestjs/common';
-import { Args, ID, Mutation, Query, Resolver } from '@nestjs/graphql';
-import { CompaniesService } from './companies.service';
-import { CreateCompanyInput } from './dto/create-company.input';
-import { Company } from './entities/company.entity/company';
+import {ParseIntPipe} from '@nestjs/common';
+import {Args, ID, Mutation, Query, Resolver} from '@nestjs/graphql';
+import {CompaniesService} from './companies.service';
+import {CreateCompanyInput} from './dto/create-company.input';
+import {UpdateCompanyInput} from './dto/update-company.input';
+import {Company} from './entities/company';
 
 /**
  * Resolver for the Companies entity.
@@ -24,13 +25,26 @@ export class CompaniesResolver {
     return this.companiesService.findAll();
   }
 
-  @Query(() => Company, { name: 'company', nullable: true })
+  @Query(() => Company, { name: 'company' })
   async findOne(@Args('id', { type: () => ID }, ParseIntPipe) id: number): Promise<Company> {
     return this.companiesService.findOne(id);
   }
 
-  @Mutation(() => Company, { name: 'createCompany', nullable: true })
+  @Mutation(() => Company, { name: 'createCompany' })
   async create(@Args('createCompanyInput') createCompanyInput: CreateCompanyInput) {
     return this.companiesService.create(createCompanyInput);
+  }
+
+  @Mutation(() => Company, { name: 'updateCompany' })
+  async update(
+    @Args('id', ParseIntPipe) id: number,
+    @Args('updateCompanyInput') updateCompanyInput: UpdateCompanyInput,
+  ) {
+    return this.companiesService.update(id, updateCompanyInput);
+  }
+
+  @Mutation(() => Company, { name: 'removeCompany' })
+  async remove(@Args('id', ParseIntPipe) id: number) {
+    return this.companiesService.remove(id);
   }
 }

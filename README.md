@@ -228,6 +228,10 @@ Subscriptions are similar to queries in that they specify a set of fields to be 
 
 A common use case for subscriptions is notifying the client side about particular events, for example the creation of a new object, when fields are updated, and many other situations…
 
+We can run this subscription on the GraphQL Playground as Insomnia has not yet allow to run subscriptions.
+
+Open the browser at `http://localhost:3000/graphql` and run the following:
+
 ```
 subscription {
   companyAdded {
@@ -237,4 +241,45 @@ subscription {
   }
 }
 
+```
+Then we run the add company mutation to check what's happening with the subscription
+as follows
+
+```
+mutation {
+  createCompany(createCompanyInput: {
+    name: "The Chocolate Company",
+    brand: "Ecommerce",
+    products: ["sale"],
+    type: BUSINESS
+  }) {
+    id,
+    name,
+    brand,
+    products {
+      id
+      name
+    }
+  }
+}
+```
+
+The response should show the following as result of being intercepted by the subscription
+
+```
+{
+  "data": {
+    "createCompany": {
+      "id": "3",
+      "name": "THE CHOCOLATE COMPANY",
+      "brand": "Ecommerce",
+      "products": [
+        {
+          "id": "3",
+          "name": "sale"
+        }
+      ]
+    }
+  }
+}
 ```

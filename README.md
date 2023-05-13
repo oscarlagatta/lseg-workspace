@@ -215,39 +215,43 @@ This should trigger a subscription result that shows the details of the company 
 
 ## The N+1 Problem
 
-```
-query: SELECT "product"."id" AS "product_id", "product"."name" AS "product_name" 
-       FROM "product" "product" 
-       INNER JOIN "company_products_product" "companies_product" 
-       ON "companies_product"."productId"="product"."id" 
-       INNER JOIN "company" "companies" 
-       ON "companies"."id"="companies_product"."companyId" 
-       AND ("companies"."id" = $1) -- PARAMETERS: [1]
+Sure! Here's the formatted text with some nice colors:
 
-query: SELECT "product"."id" AS "product_id", "product"."name" AS "product_name" 
-       FROM "product" "product" 
-       INNER JOIN "company_products_product" "companies_product" 
-       ON "companies_product"."productId"="product"."id" 
-       INNER JOIN "company" "companies" 
-       ON "companies"."id"="companies_product"."companyId" 
-       AND ("companies"."id" = $3) -- PARAMETERS: [3]
+```sql
+SELECT "product"."id" AS "product_id", "product"."name" AS "product_name" 
+FROM "product" "product" 
+INNER JOIN "company_products_product" "companies_product" 
+ON "companies_product"."productId"="product"."id" 
+INNER JOIN "company" "companies" 
+ON "companies"."id"="companies_product"."companyId" 
+AND ("companies"."id" = $1) -- PARAMETERS: [1]
 
-query: SELECT "product"."id" AS "product_id", "product"."name" AS "product_name" 
-       FROM "product" "product" 
-       INNER JOIN "company_products_product" "companies_product" 
-       ON "companies_product"."productId"="product"."id" 
-       INNER JOIN "company" "companies" 
-       ON "companies"."id"="companies_product"."companyId" 
-       AND ("companies"."id" = $4) -- PARAMETERS: [4]
+SELECT "product"."id" AS "product_id", "product"."name" AS "product_name" 
+FROM "product" "product" 
+INNER JOIN "company_products_product" "companies_product" 
+ON "companies_product"."productId"="product"."id" 
+INNER JOIN "company" "companies" 
+ON "companies"."id"="companies_product"."companyId" 
+AND ("companies"."id" = $3) -- PARAMETERS: [3]
 
-query: SELECT "product"."id" AS "product_id", "product"."name" AS "product_name" 
-       FROM "product" "product" 
-       INNER JOIN "company_products_product" "companies_product" 
-       ON "companies_product"."productId"="product"."id" 
-       INNER JOIN "company" "companies" 
-       ON "companies"."id"="companies_product"."companyId" 
-       AND ("companies"."id" = $2) -- PARAMETERS: [2]
-```
+SELECT "product"."id" AS "product_id", "product"."name" AS "product_name" 
+FROM "product" "product" 
+INNER JOIN "company_products_product" "companies_product" 
+ON "companies_product"."productId"="product"."id" 
+INNER JOIN "company" "companies" 
+ON "companies"."id"="companies_product"."companyId" 
+AND ("companies"."id" = $4) -- PARAMETERS: [4]
+
+SELECT "product"."id" AS "product_id", "product"."name" AS "product_name" 
+FROM "product" "product" 
+INNER JOIN "company_products_product" "companies_product" 
+ON "companies_product"."productId"="product"."id" 
+INNER JOIN "company" "companies" 
+ON "companies"."id"="companies_product"."companyId" 
+AND ("companies"."id" = $2) -- PARAMETERS: [2]
+``` 
+
+I've used `sql` as the language for syntax highlighting to make it easier to read the SQL queries.
 
 
 After applying the Data Loader; it's just one single query

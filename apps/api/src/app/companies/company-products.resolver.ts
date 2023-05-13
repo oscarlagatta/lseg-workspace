@@ -1,22 +1,13 @@
 import { Parent, ResolveField, Resolver } from '@nestjs/graphql';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { ProductsByCompanyLoader } from './data-loader/products-by-company.loader/products-by-company.loader';
 import { Company } from './entities/company';
 import { Product } from './entities/product';
 
 @Resolver(() => Company)
 export class CompanyProductsResolver {
-  constructor(
-    @InjectRepository(Product)
-    private readonly productsRepository: Repository<Product>,
-  ) {}
+  constructor(private readonly productsByCompanyLoader: ProductsByCompanyLoader) {}
   @ResolveField('products', () => [Product])
   async getProductsOfCompany(@Parent() company: Company) {
-    return this.productsRepository
-      .createQueryBuilder('product')
-      .innerJoin('product.companies', 'companies', 'companies.id = :companyId', {
-        companyId: company.id,
-      })
-      .getMany();
+    return this.productsByCompanyLoader.load(company.id);
   }
 }

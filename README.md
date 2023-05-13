@@ -213,6 +213,58 @@ mutation {
 
 This should trigger a subscription result that shows the details of the company we just created.
 
+## The N+1 Problem
+
+```
+query: SELECT "product"."id" AS "product_id", "product"."name" AS "product_name" 
+       FROM "product" "product" 
+       INNER JOIN "company_products_product" "companies_product" 
+       ON "companies_product"."productId"="product"."id" 
+       INNER JOIN "company" "companies" 
+       ON "companies"."id"="companies_product"."companyId" 
+       AND ("companies"."id" = $1) -- PARAMETERS: [1]
+
+query: SELECT "product"."id" AS "product_id", "product"."name" AS "product_name" 
+       FROM "product" "product" 
+       INNER JOIN "company_products_product" "companies_product" 
+       ON "companies_product"."productId"="product"."id" 
+       INNER JOIN "company" "companies" 
+       ON "companies"."id"="companies_product"."companyId" 
+       AND ("companies"."id" = $3) -- PARAMETERS: [3]
+
+query: SELECT "product"."id" AS "product_id", "product"."name" AS "product_name" 
+       FROM "product" "product" 
+       INNER JOIN "company_products_product" "companies_product" 
+       ON "companies_product"."productId"="product"."id" 
+       INNER JOIN "company" "companies" 
+       ON "companies"."id"="companies_product"."companyId" 
+       AND ("companies"."id" = $4) -- PARAMETERS: [4]
+
+query: SELECT "product"."id" AS "product_id", "product"."name" AS "product_name" 
+       FROM "product" "product" 
+       INNER JOIN "company_products_product" "companies_product" 
+       ON "companies_product"."productId"="product"."id" 
+       INNER JOIN "company" "companies" 
+       ON "companies"."id"="companies_product"."companyId" 
+       AND ("companies"."id" = $2) -- PARAMETERS: [2]
+```
+
+
+After applying the Data Loader; it's just one single query
+
+```
+query: 
+SELECT "Company"."id" AS "Company_id", 
+       "Company__Company_products"."id" AS "Company__Company_products_id", 
+       "Company__Company_products"."name" AS "Company__Company_products_name" 
+FROM "company" "Company" 
+LEFT JOIN "company_products_product" "Company_Company__Company_products" 
+       ON "Company_Company__Company_products"."companyId"="Company"."id" 
+LEFT JOIN "product" "Company__Company_products" 
+       ON "Company__Company_products"."id"="Company_Company__Company_products"."productId" 
+WHERE ("Company"."id" IN ($1, $2, $3, $4)) -- PARAMETERS: [2,3,4,1]
+```
+
 ## Conclusion
 
 In this markdown file, we have seen how to use GraphQL to build APIs using Lseg.
@@ -222,3 +274,4 @@ We have seen how to run a development server, understand the workspace, use remo
 We have also seen how to query, create, update, and remove companies using mutations, and how to query using GraphQL interfaces, unions, and enum types.
 
 Finally, we have learned about field middleware and how to implement real-time updates using subscriptions._
+

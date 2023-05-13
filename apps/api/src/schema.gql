@@ -10,24 +10,18 @@ interface Organization {
   name: String!
 }
 
-"""
-Product
-"""
+"""Product"""
 type Product {
   id: ID!
   name: String!
   companies: [Company!]!
 }
 
-"""
-Company Model
-"""
+"""Company Model"""
 type Company implements Organization {
   name: String!
 
-  """
-  A unique identifier
-  """
+  """A unique identifier"""
   id: ID!
   brand: String!
   products: [Product!]!
@@ -41,9 +35,7 @@ enum CompanyType {
   SPORT
 }
 
-"""
-Date custom scalar type
-"""
+"""Date custom scalar type"""
 scalar Date
 
 type Query {
@@ -61,9 +53,7 @@ type Mutation {
 }
 
 input CreateCompanyInput {
-  """
-  A new Company name
-  """
+  """A new Company name"""
   name: String!
   brand: String!
   products: [String!]!
@@ -71,9 +61,7 @@ input CreateCompanyInput {
 }
 
 input UpdateCompanyInput {
-  """
-  A new Company name
-  """
+  """A new Company name"""
   name: String
   brand: String
   products: [String!]

@@ -5,11 +5,18 @@ import { StockExchangeResolver } from '../stock-exchange/stock-exchange.resolver
 import { CompaniesService } from './companies.service';
 import { CompaniesResolver } from './companies.resolver';
 import { CompanyProductsResolver } from './company-products.resolver';
+import { ProductsByCompanyLoader } from './data-loader/products-by-company.loader/products-by-company.loader';
 import { Company } from './entities/company';
 import { Product } from './entities/product';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Company, Product]), PubSubModule],
-  providers: [CompaniesResolver, CompanyProductsResolver, StockExchangeResolver, CompaniesService],
+  providers: [
+    ProductsByCompanyLoader,
+    CompaniesResolver,
+    CompanyProductsResolver,
+    StockExchangeResolver,
+    CompaniesService,
+  ],
 })
 export class CompaniesModule {}

@@ -10,6 +10,7 @@ import { AppService } from './app.service';
 import { StockExchange } from './stock-exchange/entities/stock-exchange.interface';
 import { DateScalar } from './common/scalars/date.scalar';
 import { CompaniesModule } from './companies/companiesModule';
+import { ProductsByCompanyLoader } from './companies/data-loader/products-by-company.loader/products-by-company.loader';
 
 /**
  * Represents the main application module.
@@ -27,6 +28,7 @@ import { CompaniesModule } from './companies/companiesModule';
       database: 'postgres',
       autoLoadEntities: true,
       synchronize: true,
+      logging: ['query'],
     }),
     /**
      * Configures the GraphQL module.

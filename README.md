@@ -216,3 +216,24 @@ When multiple middleware functions are used, they are actually called sequential
 The first resolver is the "most-outer" layer, so it gets executed first and last (similarly to how you may have seen it achieved with the graphql-middleware package if you’ve used it before).
 
 The second resolver is the "second-outer" layer, so it gets executed second and second to last.
+
+## Real Time Updates
+
+In addition to fetching data with queries and modifying data with mutations, the GraphQL spec supports a third operation type (that we’ve only hinted at so far), called subscriptions.
+
+GraphQL subscriptions are a way to push data from the server to the clients that want to listen to real time messages from the server.
+
+Subscriptions are similar to queries in that they specify a set of fields to be delivered to the client, but instead of immediately returning a single answer, a channel is opened and a result is sent to the client every time a particular event happens on the server.
+
+A common use case for subscriptions is notifying the client side about particular events, for example the creation of a new object, when fields are updated, and many other situations…
+
+```
+subscription {
+  companyAdded {
+    id
+    name
+    brand
+  } 
+}
+
+```

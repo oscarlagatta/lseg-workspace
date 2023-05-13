@@ -67,3 +67,7 @@ input UpdateCompanyInput {
   products: [String!]
   type: CompanyType
 }
+
+type Subscription {
+  companyAdded: Company!
+}

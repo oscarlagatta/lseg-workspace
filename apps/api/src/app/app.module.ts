@@ -37,7 +37,8 @@ import { CompaniesModule } from './companies/companiesModule';
       autoSchemaFile: join(process.cwd(), 'apps/api/src/schema.gql'),
       buildSchemaOptions: {
         orphanedTypes: [StockExchange]
-      }
+      },
+      installSubscriptionHandlers: true
     }),
     /**
      * Imports the Companies module.

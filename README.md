@@ -200,3 +200,19 @@ mutation {
 	}
 }
 ```
+## Field Middleware
+
+A field middleware can be used to:
+
+- convert the result of a field
+- validate the arguments of a field,
+- or even to check field-level roles
+
+(for example, a middleware function that checks whether a role is required and allowed to access a target field).
+When multiple middleware functions are used, they are actually called sequentially (one after another) following the chain where the previous middleware decides to call the next one.
+
+**Note** - The order in which we have our middleware functions in a middleware array is very important.
+
+The first resolver is the "most-outer" layer, so it gets executed first and last (similarly to how you may have seen it achieved with the graphql-middleware package if you’ve used it before).
+
+The second resolver is the "second-outer" layer, so it gets executed second and second to last.

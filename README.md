@@ -258,8 +258,6 @@ AND ("companies"."id" = $2) -- PARAMETERS: [2]
 
 After applying the Data Loader; it's just one single query
 
-Certainly! Here's the formatted query with some colors:
-
 ```sql
 SELECT "Company"."id" AS "Company_id",
        "Company__Company_products"."id" AS "Company__Company_products_id",

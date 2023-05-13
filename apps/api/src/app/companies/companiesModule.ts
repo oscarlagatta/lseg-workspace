@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import {StockExchangeResolver} from "../stock-exchange/stock-exchange.resolver";
 import { CompaniesService } from './companies.service';
 import { CompaniesResolver } from './companies.resolver';
 import { CompanyProductsResolver } from './company-products.resolver';
@@ -8,6 +9,6 @@ import { Product } from './entities/product';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Company, Product])],
-  providers: [CompaniesResolver, CompanyProductsResolver, CompaniesService],
+  providers: [CompaniesResolver, CompanyProductsResolver, StockExchangeResolver, CompaniesService],
 })
 export class CompaniesModule {}

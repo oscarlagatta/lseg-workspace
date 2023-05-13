@@ -2,6 +2,14 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+interface Organization {
+  name: String!
+}
+
+type StockExchange implements Organization {
+  name: String!
+}
+
 """Product"""
 type Product {
   id: ID!
@@ -10,10 +18,11 @@ type Product {
 }
 
 """Company Model"""
-type Company {
+type Company implements Organization {
+  name: String!
+
   """A unique identifier"""
   id: ID!
-  name: String!
   brand: String!
   products: [Product!]!
   createdAt: Date
@@ -25,6 +34,7 @@ scalar Date
 type Query {
   companies: [Company!]!
   company(id: ID!): Company!
+  stocks: [Organization!]!
 }
 
 type Mutation {

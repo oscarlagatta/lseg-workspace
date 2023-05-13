@@ -1,5 +1,6 @@
 import { Field, ID, ObjectType } from '@nestjs/graphql';
 import {Column, CreateDateColumn, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn} from 'typeorm';
+import {Organization} from "../../common/interfaces/organization.interface";
 import { Product } from './product';
 
 /**
@@ -7,8 +8,8 @@ import { Product } from './product';
  * @class
  */
 @Entity()
-@ObjectType({ description: 'Company Model' })
-export class Company {
+@ObjectType({ description: 'Company Model', implements: () => Organization })
+export class Company implements Organization {
   /**
    * A unique identifier for the company.
    * @type {number}

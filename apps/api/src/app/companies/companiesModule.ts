@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import {PubSubModule} from "../pub-sub/pub-sub.module";
-import {StockExchangeResolver} from "../stock-exchange/stock-exchange.resolver";
+import { PubSubModule } from '../pub-sub/pub-sub.module';
+import { StockExchangeResolver } from '../stock-exchange/stock-exchange.resolver';
 import { CompaniesService } from './companies.service';
 import { CompaniesResolver } from './companies.resolver';
 import { CompanyProductsResolver } from './company-products.resolver';

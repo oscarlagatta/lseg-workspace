@@ -7,8 +7,8 @@ import { join } from 'path';
 import * as process from 'process';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import {StockExchange} from "./stock-exchange/entities/stock-exchange.interface";
-import {DateScalar} from "./common/scalars/date.scalar";
+import { StockExchange } from './stock-exchange/entities/stock-exchange.interface';
+import { DateScalar } from './common/scalars/date.scalar';
 import { CompaniesModule } from './companies/companiesModule';
 
 /**
@@ -36,9 +36,9 @@ import { CompaniesModule } from './companies/companiesModule';
       driver: ApolloDriver,
       autoSchemaFile: join(process.cwd(), 'apps/api/src/schema.gql'),
       buildSchemaOptions: {
-        orphanedTypes: [StockExchange]
+        orphanedTypes: [StockExchange],
       },
-      installSubscriptionHandlers: true
+      installSubscriptionHandlers: true,
     }),
     /**
      * Imports the Companies module.
@@ -59,7 +59,7 @@ import { CompaniesModule } from './companies/companiesModule';
      * @type {AppService}
      */
     AppService,
-    DateScalar
+    DateScalar,
   ],
 })
 export class AppModule {}

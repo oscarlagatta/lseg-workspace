@@ -105,7 +105,7 @@ mutation {
 }
 ```
 
-## Using GraphQL Interfaces 
+## Using GraphQL Interfaces
 
 ```
 {
@@ -119,7 +119,6 @@ mutation {
 ```
 
 ## Using Unions, we need to use inline fragments to be able to query any fields
-
 
 ```
 {
@@ -155,7 +154,7 @@ mutation {
     name: "Microsoft Corporation",
     brand: "Ecommerce",
     products: ["consultancy", "development"],
-		type: BUSINESS 
+		type: BUSINESS
   }) {
     id,
     name,
@@ -169,6 +168,7 @@ mutation {
 ```
 
 ## Querying The Enum Types
+
 ```
 {
 	__type(name: "CompanyType") {
@@ -200,6 +200,7 @@ mutation {
 	}
 }
 ```
+
 ## Field Middleware
 
 A field middleware can be used to:
@@ -233,7 +234,7 @@ subscription {
     id
     name
     brand
-  } 
+  }
 }
 
 ```

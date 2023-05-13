@@ -1,8 +1,8 @@
 import { Field, ID, ObjectType } from '@nestjs/graphql';
-import {Column, CreateDateColumn, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn} from 'typeorm';
-import {CompanyType} from "../../common/enums/company-type.enum";
-import {Organization} from "../../common/interfaces/organization.interface";
-import {loggerMiddleware} from "../../common/middleware/logger.middleware";
+import { Column, CreateDateColumn, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { CompanyType } from '../../common/enums/company-type.enum';
+import { Organization } from '../../common/interfaces/organization.interface';
+import { loggerMiddleware } from '../../common/middleware/logger.middleware';
 import { Product } from './product';
 
 /**
@@ -25,8 +25,7 @@ export class Company implements Organization {
    * @type {string}
    */
   @Column()
-
-  @Field(() => String, {middleware: [loggerMiddleware]})
+  @Field(() => String, { middleware: [loggerMiddleware] })
   name: string;
 
   /**
@@ -51,8 +50,7 @@ export class Company implements Organization {
   @Field(() => Date, { nullable: true })
   createdAt?: Date;
 
-  @Column({nullable: true})
+  @Column({ nullable: true })
   @Field(() => CompanyType)
-  type?: CompanyType
-
+  type?: CompanyType;
 }

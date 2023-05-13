@@ -1,6 +1,6 @@
 import { ParseIntPipe } from '@nestjs/common';
-import {Args, ID, Mutation, Query, Resolver, Subscription} from '@nestjs/graphql';
-import {PubSub} from "graphql-subscriptions";
+import { Args, ID, Mutation, Query, Resolver, Subscription } from '@nestjs/graphql';
+import { PubSub } from 'graphql-subscriptions';
 import { CompaniesService } from './companies.service';
 import { CreateCompanyInput } from './dto/create-company.input';
 import { UpdateCompanyInput } from './dto/update-company.input';
@@ -12,10 +12,7 @@ import { Company } from './entities/company';
  */
 @Resolver()
 export class CompaniesResolver {
-  constructor(
-    private readonly companiesService: CompaniesService,
-    private readonly pubSub: PubSub
-    ) {}
+  constructor(private readonly companiesService: CompaniesService, private readonly pubSub: PubSub) {}
   /**
    * Retrieves all companies.
    * @returns {Promise<Company[]>} An array of companies.

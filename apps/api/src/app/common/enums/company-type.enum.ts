@@ -1,11 +1,11 @@
-import {registerEnumType} from "@nestjs/graphql";
+import { registerEnumType } from '@nestjs/graphql';
 
 export enum CompanyType {
   BUSINESS = 'Business',
   GOVERNMENT = 'Government',
-  SPORT = 'Sport'
+  SPORT = 'Sport',
 }
 
 registerEnumType(CompanyType, {
-  name: 'CompanyType'
-})
+  name: 'CompanyType',
+});

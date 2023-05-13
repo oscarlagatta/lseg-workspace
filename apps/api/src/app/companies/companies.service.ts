@@ -1,7 +1,7 @@
 import { UserInputError } from '@nestjs/apollo';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import {PubSub} from "graphql-subscriptions";
+import { PubSub } from 'graphql-subscriptions';
 import { Repository } from 'typeorm';
 import { CreateCompanyInput } from './dto/create-company.input';
 import { UpdateCompanyInput } from './dto/update-company.input';
@@ -40,9 +40,9 @@ export class CompaniesService {
     const newCompanyEntity = this.companiesRepository.save(coffee);
 
     // not awaiting as we want it to be asynchronous
-    this.pubSub.publish('companyAdded', { companyAdded: newCompanyEntity});
+    this.pubSub.publish('companyAdded', { companyAdded: newCompanyEntity });
 
-    return newCompanyEntity
+    return newCompanyEntity;
   }
 
   async update(id: number, updateCompanyInput: UpdateCompanyInput) {

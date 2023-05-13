@@ -215,8 +215,13 @@ This should trigger a subscription result that shows the details of the company 
 
 ## The N+1 Problem
 
-Sure! Here's the formatted text with some nice colors:
+Sure, here's the formatted text with some nice paragraph formatting and colors:
 
+The **n+1 problem** - arises because GraphQL executes a separate resolver function for every field. Whereas when we work with REST APIs, there’s only one handler for each endpoint.
+
+These additional resolvers mean that GraphQL runs the risk of making more round trips to the database than are necessary for any given request.
+
+In fact, we’ve already been encountering the N+1 problem in our application, without realizing it yet!
 ```sql
 SELECT "product"."id" AS "product_id", "product"."name" AS "product_name" 
 FROM "product" "product" 
@@ -250,9 +255,6 @@ INNER JOIN "company" "companies"
 ON "companies"."id"="companies_product"."companyId" 
 AND ("companies"."id" = $2) -- PARAMETERS: [2]
 ``` 
-
-I've used `sql` as the language for syntax highlighting to make it easier to read the SQL queries.
-
 
 After applying the Data Loader; it's just one single query
 

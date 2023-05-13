@@ -252,18 +252,21 @@ query: SELECT "product"."id" AS "product_id", "product"."name" AS "product_name"
 
 After applying the Data Loader; it's just one single query
 
-```
-query: 
-SELECT "Company"."id" AS "Company_id", 
-       "Company__Company_products"."id" AS "Company__Company_products_id", 
-       "Company__Company_products"."name" AS "Company__Company_products_name" 
-FROM "company" "Company" 
-LEFT JOIN "company_products_product" "Company_Company__Company_products" 
-       ON "Company_Company__Company_products"."companyId"="Company"."id" 
-LEFT JOIN "product" "Company__Company_products" 
-       ON "Company__Company_products"."id"="Company_Company__Company_products"."productId" 
+Certainly! Here's the formatted query with some colors:
+
+```sql
+SELECT "Company"."id" AS "Company_id",
+       "Company__Company_products"."id" AS "Company__Company_products_id",
+       "Company__Company_products"."name" AS "Company__Company_products_name"
+FROM "company" "Company"
+LEFT JOIN "company_products_product" "Company_Company__Company_products"
+       ON "Company_Company__Company_products"."companyId"="Company"."id"
+LEFT JOIN "product" "Company__Company_products"
+       ON "Company__Company_products"."id"="Company_Company__Company_products"."productId"
 WHERE ("Company"."id" IN ($1, $2, $3, $4)) -- PARAMETERS: [2,3,4,1]
 ```
+
+I've used `sql` as the language identifier in the markdown code block, which will help render the colors appropriately.
 
 ## Conclusion
 

@@ -104,3 +104,99 @@ mutation {
   }
 }
 ```
+
+## Using GraphQL Interfaces 
+
+```
+{
+	stocks {
+		name
+		... on Company {
+			brand
+		}
+	}
+}
+```
+
+## Using Unions, we need to use inline fragments to be able to query any fields
+
+
+```
+{
+	stocks {
+		... on StockExchange {
+		  name
+		}
+		... on Company {
+		  name
+			brand
+		}
+	}
+}
+```
+
+## Using Enum Types
+
+```
+export enum CompanyType {
+  BUSINESS = 'Business',
+  GOVERNMENT = 'Government',
+  SPORT = 'Sport'
+}
+
+registerEnumType(CompanyType, {
+  name: 'CompanyType'
+})
+```
+
+```
+mutation {
+  createCompany(createCompanyInput: {
+    name: "Microsoft Corporation",
+    brand: "Ecommerce",
+    products: ["consultancy", "development"],
+		type: BUSINESS 
+  }) {
+    id,
+    name,
+    brand,
+    products {
+      id
+      name
+    }
+  }
+}
+```
+
+## Querying The Enum Types
+```
+{
+	__type(name: "CompanyType") {
+		enumValues {
+			name
+		}
+	}
+}
+```
+
+### Result
+
+```
+{
+	"data": {
+		"__type": {
+			"enumValues": [
+				{
+					"name": "BUSINESS"
+				},
+				{
+					"name": "GOVERNMENT"
+				},
+				{
+					"name": "SPORT"
+				}
+			]
+		}
+	}
+}
+```

@@ -1,5 +1,6 @@
 import { Field, ID, ObjectType } from '@nestjs/graphql';
 import {Column, CreateDateColumn, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn} from 'typeorm';
+import {CompanyType} from "../../common/enums/company-type.enum";
 import {Organization} from "../../common/interfaces/organization.interface";
 import { Product } from './product';
 
@@ -47,4 +48,9 @@ export class Company implements Organization {
   @CreateDateColumn()
   @Field(() => Date, { nullable: true })
   createdAt?: Date;
+
+  @Column({nullable: true})
+  @Field(() => CompanyType)
+  type?: CompanyType
+
 }

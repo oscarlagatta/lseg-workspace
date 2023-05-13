@@ -1,5 +1,6 @@
 import { Field, InputType } from '@nestjs/graphql';
 import { MinLength } from 'class-validator';
+import {CompanyType} from "../../common/enums/company-type.enum";
 
 @InputType()
 export class CreateCompanyInput {
@@ -10,4 +11,6 @@ export class CreateCompanyInput {
   brand: string;
   @Field(() => [String])
   products: string[];
+  @Field(() => CompanyType)
+  type: CompanyType;
 }

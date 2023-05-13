@@ -2,11 +2,11 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-interface Organization {
+type StockExchange implements Organization {
   name: String!
 }
 
-type StockExchange implements Organization {
+interface Organization {
   name: String!
 }
 
@@ -26,6 +26,13 @@ type Company implements Organization {
   brand: String!
   products: [Product!]!
   createdAt: Date
+  type: CompanyType!
+}
+
+enum CompanyType {
+  BUSINESS
+  GOVERNMENT
+  SPORT
 }
 
 """Date custom scalar type"""
@@ -34,8 +41,10 @@ scalar Date
 type Query {
   companies: [Company!]!
   company(id: ID!): Company!
-  stocks: [Organization!]!
+  stocks: [OrganizationsResult!]!
 }
+
+union OrganizationsResult = Company | StockExchange
 
 type Mutation {
   createCompany(createCompanyInput: CreateCompanyInput!): Company!
@@ -48,6 +57,7 @@ input CreateCompanyInput {
   name: String!
   brand: String!
   products: [String!]!
+  type: CompanyType!
 }
 
 input UpdateCompanyInput {
@@ -55,4 +65,5 @@ input UpdateCompanyInput {
   name: String
   brand: String
   products: [String!]
+  type: CompanyType
 }
